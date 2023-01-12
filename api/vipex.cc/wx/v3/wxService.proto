@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+//
+import "google/api/annotations.proto";
+///
+
+option go_package = "codeup.aliyun.com/vipex/go-web/api/vipex.cc/wx/v3";
+
+package v3;
+
+		message WxRequest {
+			string ping = 1;
+		}
+
+service Wx {
+	rpc WxPing(WxRequest) returns (WxResponse) {
+			option (google.api.http).get = "/v3/WxPing";
+	}
+}
+
+message WxResponse {
+  string reply = 1;
+}

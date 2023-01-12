@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+import "google/protobuf/struct.proto";
+
+option go_package = "codeup.aliyun.com/vipex/go-web/api/vipex.cc/wx/v1";
+
+package v1;
+
+		message WxResponse {
+			int32 err_code = 1;
+			google.protobuf.Struct
+					data =
+					2;
+			string err_msg = 3;
+		}
+
+// service WxGrpc {
+//   rpc WxAuth(WxRequest) returns (WxRsp) {}
+// }
+
+// message WxRsp {
+//   string error = 1;
+// }
