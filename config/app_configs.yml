@@ -1,4 +1,0 @@
-
-dbconnstr: "host=127.0.0.1 user=postgres password=654321 dbname=icsCloud.wx port=5432 sslmode=disable TimeZone=Asia/Shanghai"
-auth_code2session: "https://api.weixin.qq.com/sns/jscode2session?appid=wxe0000000000000vx&secret=00000000000000000000000000000000&js_code=%s&grant_type=authorization_code"
-etcd: "127.0.0.1:2379"

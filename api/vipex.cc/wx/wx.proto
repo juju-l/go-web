@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-import _ "v1/wxService.proto";
-
-option go_package = "codeup.aliyun.com/vipex/go-web/api/vipex.cc/wx";
-
-package wx;
-
-// service _ {}
