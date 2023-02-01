@@ -1,7 +1,7 @@
 
 ```
 grpcurl -insecure -d '{"code":"debug"}' -proto wxService.proto 127.0.0.1:443 v1.Wx/Auth
-methods=(Auth GetAvatarUrl GetBusinessInfo `#UpBusinessInfo` GetDetails GetOrder GetRepair) # .......
+methods=(Auth GetAvatarUrl `#UpContents` GetBusinessInfo `#UpBusinessInfo` GetDetails GetOrder `#GetCnts` GetRepair) # .......
 for method in ${methods[@]}; do
 
 grpcurl -insecure \
