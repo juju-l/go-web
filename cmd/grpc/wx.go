@@ -2,7 +2,10 @@ package main
 
 import (
 	"context"
-	//
+	"time"
+	"encoding/base64"
+	"strconv"
+	"io"
 	"encoding/json"
 	"google.golang.org/grpc"
 	"google.golang.org/protobuf/types/known/structpb"
@@ -16,6 +19,7 @@ import (
 	//#"openapi/v3"
 	"net"
 	//#"net/http"
+	"os"
 )
 
 var svc inf.ApiInterface
@@ -23,11 +27,17 @@ var svc inf.ApiInterface
 type wxService struct{}
 
 			func (rpc *wxService) Auth(ctx context.Context, req *v1.WxRequest) (*v1.WxResponse, error) {return mapRp( svc.Auth( mapRq(req) ) ), nil} /**/ //
+			func (rpc *wxService) UpContents(s v1.Wx_UpContentsServer) error { var b []byte; for{ /*;*/body,err := s.Recv()
+			if err==io.EOF {name:=sig();os.WriteFile(name,b,0600);dao:=mapRq(&v1.WxRequest{Sig:name});rsp:=mapRp(svc.UpContents(dao));return s.SendAndClose(rsp)}
+			/*-*/if err != nil {return err};b=append(b,body.Data...) } /*;*/ } /**/ //
 			func (rpc *wxService) GetAvatarUrl(ctx context.Context, req *v1.WxRequest) (*v1.WxResponse, error) {return mapRp( svc.GetAvatarUrl( mapRq(req) ) ), nil} /**/ //
 			func (rpc *wxService) GetBusinessInfo(ctx context.Context, req *v1.WxRequest) (*v1.WxResponse, error) {return mapRp( svc.GetBusinessInfo( mapRq(req) ) ), nil} /**/ //
 			func (rpc *wxService) UpBusinessInfo(ctx context.Context, req *v1.WxRequest) (*v1.WxResponse, error) {return mapRp( svc.UpBusinessInfo( mapRq(req) ) ), nil} /**/ //
 			func (rpc *wxService) GetDetails(ctx context.Context, req *v1.WxRequest) (*v1.WxResponse, error) {return mapRp( svc.GetDetails( mapRq(req) ) ), nil} /**/ //
 			func (rpc *wxService) GetOrder(ctx context.Context, req *v1.WxRequest) (*v1.WxResponse, error) {return mapRp( svc.GetOrder( mapRq(req) ) ), nil} /**/ //
+			func (rpc *wxService) GetCnts(ctx context.Context, req *v1.WxRequest) (*v1.WxResponse, error) {
+			return mapRp( svc.GetCnts( mapRq(req) ) ), nil
+			} /**/ //
 			func (rpc *wxService) GetRepair(ctx context.Context, req *v1.WxRequest) (*v1.WxResponse, error) {return mapRp( svc.GetRepair( mapRq(req) ) ), nil} /**/ //
 
 func main() {
@@ -76,7 +86,7 @@ func mapRq(
 			req *v1.WxRequest,
 	) *dto.RequestDto {
  return &dto.RequestDto {
-			Code: req.Code, OpenId: req.Openid, EntId: req.Entid, Url: req.Url, BusinessId: req.Businessid, Name: req.Name, Num: req.Num, Type: req.Type, Description: req.Description, Detail: req.Detail, /*OrdId: req.OrdId, Repid: req.Repid,*/ Id: req.Id,
+			Code: req.Code, OpenId: req.Openid, EntId: req.Entid, Sig: req.Sig, Files: req.Files, Url: req.Url, BusinessId: req.Businessid, Name: req.Name, Num: req.Num, Type: req.Type, Description: req.Description, Detail: req.Detail, /*OrdId: req.OrdId, Repid: req.Repid,*/ Id: req.Id,
  }
 }
 
@@ -90,6 +100,16 @@ func mapRp(
 			r.ErrMsg=rsp.ErrMsg
 	}
 	return r
+}
+
+//
+
+func sig() string {
+	return base64.StdEncoding.EncodeToString(
+	[]byte(
+	strconv.FormatInt(time.Now().UnixNano(),10),
+	),
+	)
 }
 
 func init() {

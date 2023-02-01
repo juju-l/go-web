@@ -35,6 +35,41 @@ paths:
             #security:
             #  - api_key:
             #    -  token
+    /v1/UpContents:
+        post:
+            tags:
+                - Wx
+            operationId: Wx_UpContents
+            #parameters:
+            #    - name: openid
+            #      in: query
+            #      schema:
+            #        type: string
+            #    - name: entid
+            #      in: query
+            #      schema:
+            #        type: string
+            #    - name: files
+            #      in: query
+            #      schema:
+            #        type: string
+            #        format: bytes
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/WxResponse'
+                #default:
+                #    description: Default error response
+                #    content:
+                #        application/json:
+                #            schema:
+                #                $ref: '#/components/schemas/Status'
+            security:
+              - api_key:
+                - token
     /v1/GetAvatarUrl/{openid}:
         get:
             tags:
@@ -159,7 +194,7 @@ paths:
                     type: string
                 - name: id
                   in: query
-                  description: string ordid = 11; string repid = 12;
+                  description: string ordid = 13; string repid = 14;
                   schema:
                     type: string
             responses:
@@ -209,6 +244,40 @@ paths:
             security:
               - api_key:
                 - token
+    /v1/GetCnts:
+        post:
+            tags:
+                - Wx
+            operationId: Wx_GetCnts
+            parameters:
+                - name: openid
+                  in: query
+                  schema:
+                    type: string
+                - name: entid
+                  in: query
+                  schema:
+                    type: string
+                - name: sig
+                  in: query
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/WxResponse'
+                #default:
+                #    description: Default error response
+                #    content:
+                #        application/json:
+                #            schema:
+                #                $ref: '#/components/schemas/Status'
+            #security:
+            #  - api_key:
+            #    -  token
     /v1/GetRepair/{openid}:
         get:
             tags:
@@ -288,3 +357,4 @@ components:
 #        - write:pets
 tags:
     - name: Wx
+

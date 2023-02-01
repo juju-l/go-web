@@ -17,6 +17,8 @@ type RequestDto struct {
 	// OrdId string `form:"orderid" binding:"required" json:"orderid"`
 	// Repid string `form:"repid" binding:"required" json:"repid"`
 	Id string `form:"id" binding:"required" json:"id"`
+	Sig string `form:"sig" binding:"required" json:"sig"`
+	Files []byte `form:"files" binding:"required" json:"files"`
 	//
 }
 

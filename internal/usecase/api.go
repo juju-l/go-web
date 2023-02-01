@@ -54,6 +54,18 @@ func (a *ApiUsecase) Auth(
 	return user, err
 }
 
+func (a *ApiUsecase) UpContents(
+			entId,openid,sig string,
+		) (map[string]interface{}, error) {
+	var err error
+	cnt := make(map[string]any)
+	if sig != "" {
+					cnt["url"] = "https://xx.vipex.cc/stc/"+sig+"" //oss
+	}
+	// ---
+	return cnt, err
+}
+
 func (a *ApiUsecase) GetAvatarUrl(
 			openid,/*,*/url string,
 		) (*entity.User, error) {
@@ -61,9 +73,9 @@ func (a *ApiUsecase) GetAvatarUrl(
 	user := &entity.User{}
 	orm.Where("openid = ?", openid).First(user)
 	if url != "" {
-		user.AvatarUrl = url
-		user.IsAuthorization = true
-		orm.Save(user)
+			user.AvatarUrl = url
+			user.IsAuthorization = true
+			orm.Save(user)
 	}
 	return user, err
 }
@@ -184,6 +196,14 @@ func (a *ApiUsecase) GetOrder(
 	}
 	orm.Where("entid = ? AND openid = ? AND id in (?)", entid, openid, *ordid).Find(detail)
 	return detail, nil
+}
+
+func (a *ApiUsecase) GetCnts(
+			entId,openid,sig string,
+		) (map[string]interface{}, error) {
+	var err error
+			cnt := make(map[string]any)
+	return cnt, err
 }
 
 func (a *ApiUsecase) GetRepair(
