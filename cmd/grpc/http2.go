@@ -32,7 +32,7 @@ func reg()*runtime.ServeMux {
 	ext.Must(credentials.NewServerTLSFromFile("config/tls.crt","config/.tls.key",/**/)).(credentials.TransportCredentials),
 	),
 	}
-	if e := v1.RegisterWxHandlerFromEndpoint(context.Background(),m,"i.vipex.cc:443",o,/**/);e != nil {
+	if e := v1.RegisterWxHandlerFromEndpoint(context.Background(),m,"xx.vipex.cc:443",o,/**/);e != nil {
 			panic(e)
 	}
 	return m

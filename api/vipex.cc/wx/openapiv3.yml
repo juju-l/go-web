@@ -7,7 +7,7 @@ info:
     #description: 
     version: 0.1.0
 servers:
-    - url: https://i.vipex.cc/
+    - url: https://xx.vipex.cc/
 paths:
     /v1/Auth:
         get:
@@ -40,20 +40,12 @@ paths:
             tags:
                 - Wx
             operationId: Wx_UpContents
-            #parameters:
-            #    - name: openid
-            #      in: query
-            #      schema:
-            #        type: string
-            #    - name: entid
-            #      in: query
-            #      schema:
-            #        type: string
-            #    - name: files
-            #      in: query
-            #      schema:
-            #        type: string
-            #        format: bytes
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            type: string
+                required: true
             responses:
                 "200":
                     description: OK

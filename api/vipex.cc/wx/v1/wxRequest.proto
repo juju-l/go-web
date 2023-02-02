@@ -10,16 +10,18 @@ package v1;
 			string code = 1;
 			string openid = 2;
 			string entid = 3;
-			string url = 4;
-			string businessid = 5;
-			string name = 6;
-			string num = 7;
-			string type = 8;
-			string description = 9;
-			string detail = 10;
-			// string ordid = 11;
-			// string repid = 12;
-			string id = 13;
+			string sig = 4;
+			bytes files = 5;
+			string url = 6;
+			string businessid = 7;
+			string name = 8;
+			string num = 9;
+			string type = 10;
+			string description = 11;
+			string detail = 12;
+			// string ordid = 13;
+			// string repid = 14;
+			string id = 15;
 		}
 
 // service WxGrpc {
