@@ -20,7 +20,7 @@ func main() {
 	r := gin.Default()
 	r.RedirectFixedPath = true
 	r.Use(ext.Authorize())
-	//#reg();r.Use(c())
+	reg();r.Use(c())//#
 			grp := func (s string) {
 	api := r.Group(s); {
 			api.GET("/auth", func(c *gin.Context) { var req=&dto.RequestDto{}; c.ShouldBind(req);c.ShouldBindJSON(req);c.ShouldBindUri(req); c.JSON(200, svc.Auth( req )) }, /**/)//

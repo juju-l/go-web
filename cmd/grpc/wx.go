@@ -18,7 +18,7 @@ import (
 	"go-web/util/ext"
 	//#"openapi/v3"
 	"net"
-	//#"net/http"
+	"net/http"
 	"os"
 )
 
@@ -65,21 +65,21 @@ func main() {
 	//
 		reflection.Register(s)
 			//
-	if e:=s.Serve(l);e!=nil {
-			panic( e )
-	}
+	//if e:=s.Serve(l);e!=nil {
+			//panic( e )
+	//}
 			//
-	/*#if e:=http.ServeTLS(
+	if e:=http.ServeTLS(
 			l,
 	grpcHandlerFunc(
-	s, v3.OpenapiV3(), reg(),
+			s, nil, reg(),
 	),
 			"config/tls.crt",
 			"config/.tls.key",
 			///
 	);e!=nil {
 					panic( e )/////
-	}#*/
+	}
 }
 
 func mapRq(
