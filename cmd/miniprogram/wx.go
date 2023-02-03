@@ -18,9 +18,11 @@ var svc inf.ApiInterface
 
 func main() {
 	r := gin.Default()
+	r.RedirectFixedPath = true
 	r.Use(ext.Authorize())
 	//#reg();r.Use(c())
-	api := r.Group("/api"); {
+			grp := func (s string) {
+	api := r.Group(s); {
 			api.GET("/auth", func(c *gin.Context) { var req=&dto.RequestDto{}; c.ShouldBind(req);c.ShouldBindJSON(req);c.ShouldBindUri(req); c.JSON(200, svc.Auth( req )) }, /**/)//
 			api.POST("/upContents", func(c *gin.Context) { var req=&dto.RequestDto{}
 			c.ShouldBind(req);if c.Request.Body!=nil{req.Files,_=ioutil.ReadAll(c.Request.Body); req.Sig=sig(); os.WriteFile(req.Sig,req.Files,0600)};c.ShouldBindUri(req)
@@ -35,6 +37,8 @@ func main() {
 			c.JSON(200, svc.GetCnts( req )) }, /**/)//
 			api.GET("/getRepair/:openid", func(c *gin.Context) { var req=&dto.RequestDto{}; c.ShouldBind(req);c.ShouldBindJSON(req);c.ShouldBindUri(req); c.JSON(200, svc.GetRepair( req )) }, /**/)//
 	}
+			}
+	grp("/api");grp("/v1");grp("/v2")
 	r.Use(cors.Default())
 	//r.Use(c())
 	r.RunTLS(":443", "config/tls.crt", "config/.tls.key")
