@@ -12,7 +12,7 @@ pipeline {
   // }
   environment {
       token = credentials("token")
-      httpBin = "git clone https://${token}@codeup.aliyun.com/vipex/go-web.git -b dev . 2>&1 > /dev/null"
+      httpBin = "git clone https://${token}@codeup.aliyun.com/vipex/go-bin.git -b dev . 2>&1 > /dev/null"
       TZ = "Asia/Shanghai"
   }
   parameters {
