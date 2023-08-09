@@ -26,7 +26,7 @@ CREATE TABLE "detail" (
   "entid" text NOT NULL DEFAULT (uuid()),
   "openid" text NOT NULL,
   "id" text NOT NULL,
-  "detail" jsonb,
+  "detail" text,
   "timesp" timestamp DEFAULT (DATETIME('now','localtime')),
   "is_valid" integer DEFAULT 1,
   "sid" text,
